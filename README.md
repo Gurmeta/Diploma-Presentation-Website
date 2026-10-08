@@ -18,9 +18,9 @@
 
 Built for my bachelor's thesis at the University of Telecommunications and Posts (UTP), Sofia. The thesis creates a website on Microsoft Azure with Infrastructure as Code (HashiCorp Terraform). The deck lets the audience try it: a Terraform terminal, a cost calculator and comparison charts.
 
-**Result:** the thesis and its defence were both graded **Excellent 6 (GPA A)**.
+**Result:** the thesis and its defence were both graded **Excellent 6 (GPA 4.0)**.
 
-*Кратко на български: интерактивна презентация за защита на дипломна работа – автоматизирано създаване на уебсайт чрез Azure и IaC (Terraform). Защитата и дипломната работа са оценени с **Отличен 6 (GPA A)**. Вижте раздела [На български](#на-български).*
+*Кратко на български: интерактивна презентация за защита на дипломна работа – автоматизирано създаване на уебсайт чрез Azure и IaC (Terraform). Защитата и дипломната работа са оценени с **Отличен 6 (GPA 4.0)**. Вижте раздела [На български](#на-български).*
 
 ## Try the demo
 
@@ -134,7 +134,7 @@ If the repository is renamed, update `base` in [`vite.config.ts`](vite.config.ts
 
 Интерактивна презентация за защита на дипломна работа на тема **„Автоматизирано създаване на уебсайт чрез Azure и практиката IaC“**. Съдържа симулатор на Terraform терминал, калкулатор на разходите за Azure, сравнителни графики и архитектурна диаграма.
 
-**Резултат:** дипломната работа и защитата са оценени с **Отличен 6 (GPA A)**.
+**Резултат:** дипломната работа и защитата са оценени с **Отличен 6 (GPA 4.0)**.
 
 ### Как да пробвате демото
 
