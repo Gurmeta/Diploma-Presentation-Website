@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens.
+ * The deck is styled like a drafting sheet: cool paper, ink-blue lines, and a
+ * dark terminal panel as the heaviest element. Azure blue and Terraform violet
+ * carry meaning (platform vs. code), not decoration.
+ *
+ * Colours are CSS variables so the light and dark themes swap in one place.
+ * The theme is set through `data-theme` on <html> (see src/theme).
+ */
+:root {
+  color-scheme: light;
+
+  --c-paper: #e8ebf0;
+  --c-sheet: #f8f9fb;
+  --c-surface: #ffffff;
+  --c-ink: #0e1a2b;
+  --c-ink-2: #3a485c;
+  --c-ink-3: #56647a;
+  --c-rule: #c6cdd8;
+  --c-rule-soft: #dde2ea;
+
+  --c-azure: #0a62bd;
+  --c-azure-soft: #dbe9f7;
+  --c-tf: #5a3ec2;
+  --c-tf-soft: #e6e0f8;
+  --c-add: #12693f;
+  --c-add-soft: #dcf0e5;
+  --c-warn: #9a470a;
+  --c-warn-soft: #fbead8;
+  --c-err: #ab2418;
+  --c-err-soft: #fbe3e0;
+
+  --c-term: #0b1524;
+  --c-term-2: #14233a;
+  --c-term-text: #d3e0f1;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --c-paper: #0c1420;
+  --c-sheet: #121c2b;
+  --c-surface: #182538;
+  --c-ink: #e7eef8;
+  --c-ink-2: #b4c1d4;
+  --c-ink-3: #8f9db2;
+  --c-rule: #2b3a50;
+  --c-rule-soft: #1f2b3d;
+
+  --c-azure: #5eacff;
+  --c-azure-soft: #143556;
+  --c-tf: #ab98ff;
+  --c-tf-soft: #2a2250;
+  --c-add: #5fd69a;
+  --c-add-soft: #143828;
+  --c-warn: #f2a762;
+  --c-warn-soft: #3b2512;
+  --c-err: #ff8f84;
+  --c-err-soft: #3f1c19;
+
+  --c-term: #060d18;
+  --c-term-2: #101c2e;
+  --c-term-text: #d3e0f1;
+}
+
+@theme inline {
+  --font-sans: "Geologica", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --color-paper: var(--c-paper);
+  --color-sheet: var(--c-sheet);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-rule: var(--c-rule);
+  --color-rule-soft: var(--c-rule-soft);
+
+  --color-azure: var(--c-azure);
+  --color-azure-soft: var(--c-azure-soft);
+  --color-tf: var(--c-tf);
+  --color-tf-soft: var(--c-tf-soft);
+  --color-add: var(--c-add);
+  --color-add-soft: var(--c-add-soft);
+  --color-warn: var(--c-warn);
+  --color-warn-soft: var(--c-warn-soft);
+  --color-err: var(--c-err);
+  --color-err-soft: var(--c-err-soft);
+
+  --color-term: var(--c-term);
+  --color-term-2: var(--c-term-2);
+  --color-term-text: var(--c-term-text);
+}
+
+/* Scale with the viewport so the deck reads on a projector and on a phone */
+html {
+  font-size: clamp(16px, 0.55vw + 10px, 20px);
+  -webkit-text-size-adjust: 100%;
+  /* Keep focused elements clear of the sticky control bar */
+  scroll-padding-bottom: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  overscroll-behavior-x: none;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+select,
+input[type="range"],
+[role="tab"] {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-azure);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--c-azure-soft);
+}
+
+/* The UTP logo is a JPEG with a white background: give it a pad on dark */
+:root[data-theme="dark"] .logo-img {
+  background: #fff;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+/* Slide headings: one scale for every slide */
+.slide-title {
+  font-size: clamp(1.75rem, 1.1rem + 2.2vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.slide-lede {
+  font-size: clamp(1rem, 0.9rem + 0.35vw, 1.25rem);
+  color: var(--c-ink-2);
+  line-height: 1.5;
+  max-width: 46rem;
+  text-wrap: pretty;
+}
+
+/* Body copy keeps lines under ~70 characters */
+.prose-measure {
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "zero" 1;
+}
+
+/* Thin, quiet scrollbars inside panels; scrolling never chains to the page */
+.panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-rule) transparent;
+  overscroll-behavior: contain;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 0.9rem;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  border-radius: 2px;
+  font-size: 0.875rem;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
